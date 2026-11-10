@@ -1,0 +1,6 @@
+1) AVAA PACKAGE MANAGER(WINDOW-VÄLILEHTI)
+2) KLIKKAA VASEMMASTA YLÄKULMASTA PLUSSAA (+) JA Install package by technical name
+3) KIRJOITA YLEMMÄLLE RIVILLE com.unity.nuget.newtonsoft-json 
+- asentaa Newtonsoft Json -paketin uusimman version (kirjoitushetkellä 3.2.2) 
+- Paketti on parempi kuin Unityn oma JSON-paketti ja mahdollistaa erilaisten objektien serialisoinnin
+esim. dictionary-muodon, jota Unityn oma ei mahdollista. Sisältää myös näppärän JSON-parserin.

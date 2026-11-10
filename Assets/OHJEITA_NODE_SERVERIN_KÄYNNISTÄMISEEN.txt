@@ -1,0 +1,39 @@
+OHJEITA NODE-SERVERIN KÄYNNISTÄMISEEN:
+terminaali auki CTRL-Ö
+-------
+1) Lataa laragon (https://laragon.org/download/index.html) ja asenna se. Käynnistä laragon ja käynnistä Apache-palvelin ja MySQL (Start All).
+- mysql käynnistyy oletuksena porttiin 3306, käyttäjätunnus on root ja salasana on tyhjä (ei salasanaa).
+- apache käynnistyy porttiin 80, mutta jos portti on jo käytössä, voit vaihtaa sen esim. 8080:aan (Settings > Services & Ports > Apache > Main Port).
+
+2) Klikkaa laragonin valikosta Menu->Tools>Quick Add>phpmyadmin, jolloin phpmyadminini saa auki selaimeen osoitteessa localhost:80/phpmyadmin
+- voit myös muokata C:\laragon\www\index.php-tiedostoa, ja lisätä siihen linkin phpmyadminiin halutessasi
+
+
+3) alustetaan kansio noden käyttöön (kansio voi olla unity-projektin Assets-kansiossa, mutta ei pakollinen, eli voi sijaita missä tahansa, 
+yleensä muualla jottei modulit vie tilaa unity-projektin kansiosta, ja node-modulit eivät ole tarpeellisia unitylle, joten ne voi pitää erillään)
+
+npm init (voit painaa enter kaikkiin kohtiin, niitä voi muutella halutessaan myöhemmin package.json -tiedostossa)
+- komento luo package.json -tiedoston, joka sisältää projektin tiedot ja riippuvuudet (dependencies) sekä 4.kohdan scripts-kohdan, jota muokataan myöhemmin.
+
+4) asennetaan mysql2 ja express -modulit (huom! mysql-modulista on siis uudempi versio nimeltään mysql2, jota suositellaan mysql-modulin sijaan)
+
+npm install mysql2 express nodemon (nodemon ei pakollinen, mutta restartaa serverin automaattisesti, katso kohta 5)
+- komento luo node_modules -kansion, johon asennetaan modulit, ja package.json -tiedostoon lisätään dependencies-kohtaan asennetut modulit.
+- komento luo myös package-lock.json -tiedoston, joka sisältää tarkat versiot asennetuista moduuleista.
+
+5) jos asensit aiemmin mysql -modulin, poista se (tässä vain ohjeet miten voit poistaa asennetun modulin):
+npm remove mysql 
+ja asenna mysql2 -moduli:
+npm install mysql2
+
+6) Muokkaa package.json -tiedoston scripts-kohta seuraavanlaiseksi (emme tarvitse tässä muuta, eli voit poistaa oletuksena olevan "test"-rivin):
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+
+
+7) kun app.js -koodi valmis (voit käyttää valmista app.js-tiedostoa), käynnistä serveri
+npm run dev (CTRL-C sammuttaa serverin) // tämä komento ajaa nyt package.json:in scripts>dev>kohdan komennon nodemon app.js
+joka käynnistää serverin ja restartaa serverin aina jos teet jonkin muutoksen app.js -tiedostoon ja tallennat tiedoston.
+Nodemon ei ole pakollinen, mutta helpottaa, kun muutosten myötä ei tarvitse aina sulkea ja avata serveriä. 
+Etenkin, kun joskus serveri ei sulkeudu täysin, ja kone ilmoittaa ettei voi käynnistää kun portti on jo käytössä.
